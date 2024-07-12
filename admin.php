@@ -15,11 +15,11 @@
     <div id="top" style=" background:#999 center; background-size:cover; " title="替代文字">
       <h1>ABC影城</h1>
     </div>
-    <div id="top2"> 
-    <a href="index.php">首頁</a> 
-      <a href="?do=order">線上訂票</a> 
-      <a href="#">會員系統</a> 
-      <a href="admin.php">管理系統</a>  
+    <div id="top2">
+      <a href="index.php">首頁</a>
+      <a href="?do=order">線上訂票</a>
+      <a href="#">會員系統</a>
+      <a href="admin.php">管理系統</a>
     </div>
     <div id="text"> <span class="ct">最新活動</span>
       <marquee direction="right">
@@ -27,18 +27,17 @@
       </marquee>
     </div>
     <div id="mm">
-      <div class="ct a rb" style="position:relative; width:101.5%; left:-1%; padding:3px; top:-9px;"> 
-        <a href="?do=tit">網站標題管理</a>| 
-        <a href="?do=go">動態文字管理</a>| 
-        <a href="?do=trailer">預告片海報管理</a>| 
-        <a href="?do=movie">院線片管理</a>| 
-        <a href="?do=order">電影訂票管理</a> 
-      </div>
-      <div class="rb tab">
-        <h2 class="ct">請選擇所需功能</h2>
-      </div>
+      <?php
+      $do = $_GET['do'] ?? 'main';
+      $file = "backend/{$do}.php";
+      if (file_exists($file)) {
+        include "$file";
+      } else {
+        include "backend/main.php";
+      }
+      ?>
     </div>
-    <div id="bo"> ©Copyright 2010~2014 ABC影城 版權所有 </div>
+    <div id="bo"> ©Copyright 2020~2024 ABC影城 版權所有 </div>
   </div>
 </body>
 
