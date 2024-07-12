@@ -54,7 +54,7 @@ class DB
         } else {
             // insert
             $keys = array_keys($arg);
-            $sql = "insert into `$this->table`(`" . join("`,`", $keys) . "`)
+            $sql = "insert into `$this->table` (`" . join("`,`", $keys) . "`)
                  values('" . join("','", $arg) . "')";
         }
         // echo $sql;

@@ -30,7 +30,36 @@
         <div style="height:180px;overflow:auto">
             <?php
             $rows = $Poster->all(" order by rank");
-            foreach ($rows as $row) {
+            foreach ($rows as $idx => $row) {
+                $prev = ($idx != 0) ? $rows[$idx - 1]['id'] : $row['id'];
+                $next = ($idx != (count($rows) - 1)) ? $rows[$idx + 1]['id'] : $row['id'];
+                // dd($rows);
+                /* 
+                Array
+                (
+                    [0] => Array
+                        (
+                            [id] => 1
+                            [name] => 預告片11
+                            [img] => 03A01.jpg
+                            [rank] => 1
+                            [ani] => 3
+                            [sh] => 1
+                        )
+
+                    [1] => Array
+                        (
+                            [id] => 2
+                            [name] => 預告片25
+                            [img] => 03A02.jpg
+                            [rank] => 2
+                            [ani] => 2
+                            [sh] => 1
+                        )
+
+                )
+                */
+                // dd($row);
             ?>
                 <div class="row">
                     <div>
@@ -40,8 +69,8 @@
                         <input type="text" name="name[]" value="<?= $row['name'] ?>">
                     </div>
                     <div>
-                        <button type="button">往上</button>
-                        <button type="button">往下</button>
+                        <button type="button" data-sw='<?= $row['id'] ?>-<?= $prev ?>' class="sw">往上</button>
+                        <button type="button" data-sw='<?= $row['id'] ?>-<?= $next ?>' class="sw">往下</button>
                     </div>
                     <div>
                         <input type="checkbox" name="sh[]" value="<?= $row['id'] ?>" <?= ($row['sh'] == 1) ? 'checked' : ''; ?>>顯示
@@ -78,3 +107,16 @@
         <div class="ct"><input type="submit" value="新增"><input type="reset" value="重置"></div>
     </form>
 </div>
+
+<script>
+    $(".sw").on("click", function() {
+        console.log('$(this)', $(this));
+        $.post("./api/sw.php", {
+            table: 'Poster',
+            sw: $(this).data('sw')
+        }, (res) => {
+            console.log(res);
+            // location.reload();
+        })
+    })
+</script>
