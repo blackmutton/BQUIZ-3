@@ -39,13 +39,7 @@ if (isset($_POST['acc'])) {
     </div>
     <div id="mm">
       <?php
-      $do = $_GET['do'] ?? 'main';
-      $file = "backend/{$do}.php";
-      if (file_exists($file)) {
-        include "$file";
-      } else {
-        include "backend/main.php";
-      }
+      include "backend/main.php";
       ?>
     </div>
     <div id="bo"> ©Copyright 2020~2024 ABC影城 版權所有 </div>

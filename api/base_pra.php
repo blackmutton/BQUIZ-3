@@ -33,5 +33,21 @@ class DB
     public function find($arg)
     {
         $sql = "slect * from `$this->table`";
+        if (is_array($arg)) {
+            $tmp = $this->a2s($arg);
+            $sql .= " where " . join(" && ", $tmp);
+        } else {
+            $sql .= " where `id`=`$arg`";
+        }
+        echo $sql;
+        return $this->pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
+    }
+    public function save($arg)
+    {
+        if (isset($arg['id'])) {
+            // update
+            $tmp = $this->a2s($arg);
+            $sql = "update`$this->table`";
+        }
     }
 }
