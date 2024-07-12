@@ -47,7 +47,8 @@ class DB
         if (isset($arg['id'])) {
             // update
             $tmp = $this->a2s($arg);
-            $sql = "update`$this->table`";
+            $sql = "update`$this->table` set ".join(",",$tmp);
+            $sql.=" where ";
         }
     }
 }
