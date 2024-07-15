@@ -42,19 +42,23 @@
   $(".poster").eq(0).show()
   let now = 0
   let next = 1
-  let slid = setInterval(() => {
+  let slide = setInterval(() => {
     ani()
   }, 3000)
 
-  function ani() {
-    let ani = Number($(".poster").eq(now).data('ani'))
-    if (now < $(".poster").length - 1) {
-      next = now + 1
+  function ani(idx) {
+    let code = Number($(".poster").eq(now).data('ani'))
+    if (idx != undefined) {
+      next = idx;
     } else {
-      next = 0;
+      if (now < $(".poster").length - 1) {
+        next = now + 1;
+      } else {
+        next = 0
+      }
     }
-    console.log(ani, now, next)
-    switch (ani) {
+    console.log(code, now, next)
+    switch (code) {
       case 1:
         // 淡入淡出
         $(".poster").eq(now).fadeOut(1000, () => {
@@ -101,7 +105,25 @@
         break;
     }
   })
+
+  $(".btns").hover(
+    function() {
+      clearInterval(slide)
+    },
+    function() {
+      slide = setInterval(() => {
+        ani()
+      }, 3000)
+    }
+  )
+
+  $(".btn").on('click', function() {
+    let idx = $(this).index();
+    ani(idx)
+  })
 </script>
+
+
 <div class="half">
   <h1>院線片清單</h1>
   <div class="rb tab" style="width:95%;">
