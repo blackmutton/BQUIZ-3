@@ -2,7 +2,7 @@
 /* CSS Document */
 
 #posters {
-	width: 210px;
+	width: 420px;
 	height: 400px;
 	margin: auto;
 	position: relative;
@@ -89,4 +89,11 @@
 	width: 80px;
 	height: 100px;
 	position: relative;
+	/* 保留自己寬度而不跟img延展 */
+	flex-shrink: 0;
+	text-align: center;
+}
+
+.btns .btn img {
+	width: 60px;
 }
