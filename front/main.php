@@ -34,9 +34,22 @@
 </div>
 <script>
   $(".poster").eq(0).show()
-  $(".poster").eq(0).fadeOut(3000, () => {
-    $(".poster").eq(1).fadeIn(3000)
-  })
+  let start = 0
+  let slid = setInterval(() => {
+    ani()
+  }, 3000)
+
+  function ani() {
+
+    $(".poster").eq(start).fadeOut(1000, () => {
+      if (start < $(".poster").length - 1) {
+        start++
+      } else {
+        start = 0;
+      }
+      $(".poster").eq(start).fadeIn(1000)
+    })
+  }
 </script>
 <div class="half">
   <h1>院線片清單</h1>
