@@ -37,7 +37,7 @@
             </div>
             <div>
                 <label for="">分級</label>:
-                <select name="levle">
+                <select name="level">
                     <option value="1">普遍級</option>
                     <option value="2">輔導級</option>
                     <option value="3">保護級</option>
