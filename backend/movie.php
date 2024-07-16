@@ -5,6 +5,7 @@
         color: black;
         display: flex;
         padding: 3px;
+        align-items: center;
     }
 
     .movie .img {
@@ -34,28 +35,37 @@
 </style>
 <button onclick="location.href='?do=add_movie'">新增電影</button>
 <hr>
-<div class="movie">
-    <div class="img">
-        <img src="" alt="" style="width:60px;height:80px">
-    </div>
-    <div class="level">
-        分級: <img src="../icons/" alt="" style="width:20px">
-    </div>
-    <div class="info">
-        <div class="base">
-            <div>片名：</div>
-            <div>片長：</div>
-            <div>上映時間：</div>
+<div style="width:100%;height:400px;overflow:auto;">
+    <?php
+    $movies = $Movie->all(" order by rank");
+    foreach ($movies as $movie) {
+    ?>
+        <div class="movie">
+            <div class="img">
+                <img src="./images/<?= $movie['poster']; ?>" alt="" style="width:60px;height:80px">
+            </div>
+            <div class="level">
+                分級: <img src="./icon/03C0<?= $movie['level']; ?>.png" alt="" style="width:20px">
+            </div>
+            <div class="info">
+                <div class="base">
+                    <div>片名：<?= $movie['name']; ?></div>
+                    <div>片長：<?= $movie['length']; ?></div>
+                    <div>上映時間：<?= $movie['ondate']; ?></div>
+                </div>
+                <div class="btns">
+                    <button>顯示</button>
+                    <button>往上</button>
+                    <button>往下</button>
+                    <button onclick="location.href='?do=edit_movie&id=<?= $movie['id'] ?>'">編輯電影</button>
+                    <button onclick="del('Movie',<?= $movie['id'] ?>)">刪除電影</button>
+                </div>
+                <div class="intro">
+                    劇情介紹:<?= $movie['intro']; ?>
+                </div>
+            </div>
         </div>
-        <div class="btns">
-            <button>顯示</button>
-            <button>往上</button>
-            <button>往下</button>
-            <button onclick="location.href='?do=edit_movie'">編輯電影</button>
-            <button>刪除電影</button>
-        </div>
-        <div class="intro">
-            劇情介紹:
-        </div>
-    </div>
+    <?php
+    }
+    ?>
 </div>
