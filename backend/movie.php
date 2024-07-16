@@ -56,7 +56,7 @@
                     <div>上映時間：<?= $row['ondate']; ?></div>
                 </div>
                 <div class="btns">
-                    <button>顯示</button>
+                    <button class='show' data-id="<?= $row['id']; ?>"><?= ($row['sh'] == 1) ? '顯示' : '隱蔵'; ?></button>
                     <button data-sw='<?= $row['id'] ?>-<?= $prev ?>' class="sw">往上</button>
                     <button data-sw='<?= $row['id'] ?>-<?= $next ?>' class="sw">往下</button>
                     <button onclick="location.href='?do=edit_movie&id=<?= $row['id'] ?>'">編輯電影</button>
@@ -74,13 +74,30 @@
 
 <script>
     $(".sw").on("click", function() {
-        console.log('$(this)', $(this));
+        console.log($(this).data('sw'))
         $.post("./api/sw.php", {
             table: 'Movie',
             sw: $(this).data('sw')
         }, (res) => {
-            console.log(res);
+            console.log(res)
             location.reload();
+        })
+    })
+
+    $(".show").on("click", function() {
+        $.post("./api/show.php", {
+            id: $(this).data("id")
+        }, () => {
+            //location.reload();
+            console.log($(this).text())
+            switch ($(this).text()) {
+                case '顯示':
+                    $(this).text('隱藏')
+                    break;
+                case '隱藏':
+                    $(this).text('顯示')
+                    break;
+            }
         })
     })
 </script>
