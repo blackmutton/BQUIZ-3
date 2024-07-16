@@ -38,11 +38,11 @@ dd($_POST);
     [director] => director
     [intro] => 劇情簡介13
 ) */
-if (isset($_FILES['poster']['tmp_name'])) {
+if (!empty($_FILES['poster']['tmp_name'])) {
     move_uploaded_file($_FILES['poster']['tmp_name'], "../images/" . $_FILES['poster']['name']);
     $_POST['poster'] = $_FILES['poster']['name'];
 }
-if (isset($_FILES['trailer']['tmp_name'])) {
+if (!empty($_FILES['trailer']['tmp_name'])) {
     move_uploaded_file($_FILES['trailer']['tmp_name'], "../images/" . $_FILES['trailer']['name']);
     $_POST['trailer'] = $_FILES['trailer']['name'];
 }
@@ -52,8 +52,10 @@ unset(
     $_POST['month'],
     $_POST['day']
 );
-$_POST['sh'] = 1;
-$_POST['rank'] = $Movie->max() + 1;
+if (!isset($_POST['id'])) {
+    $_POST['sh'] = 1;
+    $_POST['rank'] = $Movie->max() + 1;
+}
 dd($_POST);
 /* Array
 (
