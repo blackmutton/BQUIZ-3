@@ -128,15 +128,17 @@
   <h1>院線片清單</h1>
   <div class="rb tab" style="width:95%;">
     <?php
-    $all = $Movie->count(" where ondate >= '2024-07-26' && sh=1");
+    $today = date("Y-m-d");
+    $ondate = date("Y-m-d", strtotime("-2 days"));
+    $all = $Movie->count(" where ondate >= '$ondate' && ondate <='$today' && sh=1");
     $div = 4;
     $pages = ceil($all / $div);
     $now = $_GET['p'] ?? 1;
     $start = ($now - 1) * $div;
-    $movies = q("select * from `movies` where ondate >= '2024-07-26' && sh=1 order by rank limit $start,$div");
+    $movies = q("SELECT * FROM `movies` WHERE ondate >= '$ondate' && ondate <='$today' && sh=1 order by rank limit $start,$div");
     foreach ($movies as $movie) {
     ?>
-      <div class="movie"><?= $movie['name'] ?></div>
+      <div class="movie"><?= $movie['name']; ?></div>
     <?php
     }
     ?>
@@ -144,15 +146,15 @@
       <?php
       if (($now - 1) > 0) {
         $prev = $now - 1;
-        echo "<a href='?p=$prev'> <</a>";
+        echo "<a href='?p=$prev'> < </a>";
       }
       for ($i = 1; $i <= $pages; $i++) {
         $size = ($i == $now) ? 'font-size:18px' : '';
-        echo "<a href='?p-$i' style='$size'>$i</a>";
+        echo "<a href='?p=$i' style='$size'> $i </a>";
       }
       if (($now + 1) <= $pages) {
         $next = $now + 1;
-        echo "<a href='?p=$next'> ></a>";
+        echo "<a href='?p=$next'> > </a>";
       }
       ?>
     </div>
