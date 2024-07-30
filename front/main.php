@@ -174,7 +174,9 @@
     ?>
       <div class="movie">
         <div class="movie-img">
-          <img src="./images/<?= $movie['poster']; ?>" style="width:60px;">
+          <a href="?do=intro&id=<?= $movie['id']; ?>">
+            <img src="./images/<?= $movie['poster']; ?>" style="width:60px;">
+          </a>
         </div>
         <div class="movie-info">
           <div style="font-size:18px"><?= $movie['name']; ?></div>
