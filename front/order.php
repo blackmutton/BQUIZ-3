@@ -48,7 +48,7 @@
             </tr>
             <tr>
                 <td colspan=2 class='ct'>
-                    <input type="button" value="確定" onclick="$('#booking,#menuBlock').toggle()">
+                    <input type="button" value="確定" onclick="loadSeats()">
                     <input type="reset" value="重置">
                 </td>
 
@@ -56,8 +56,8 @@
         </table>
     </form>
 </div>
-<div id="booking" style="display:none" onclick="$('#booking,#menuBlock').toggle()">
-    <button>上一步</button>
+<div id="booking" style="display:none">
+    <button onclick="$('#booking,#menuBlock').toggle()">上一步</button>
 </div>
 
 <script>
@@ -74,6 +74,18 @@
         let date = $(this).val()
         getSession(id, date)
     })
+
+    function loadSeats() {
+        let info = {
+            id: $('#movie').val(),
+            date: $('#date').val(),
+            session: $('#session').val()
+        }
+        $.get("./api/load_seats.php", info, function(seats) {
+            $("#booking").html(seats);
+            $('#bookings,#menuBlock').toggle()
+        })
+    }
 
     function getMovies() {
         $.get("./api/get_movies.php", function(movies) {
