@@ -6,7 +6,14 @@ $level = [
     '2' => '保護級',
     '3' => '輔導級',
     '4' => '限制級',
-  ];
+];
+$times = [
+    1 => '14:00~16:00',
+    2 => '16:00~18:00',
+    3 => '18:00~20:00',
+    4 => '20:00~22:00',
+    5 => '22:00~24:00',
+];
 class DB
 {
     protected $table;
@@ -145,5 +152,5 @@ function dd($array)
     echo "</pre>";
 }
 
-$Poster=new DB("posters");
-$Movie=new DB("movies");
+$Poster = new DB("posters");
+$Movie = new DB("movies");

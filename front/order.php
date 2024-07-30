@@ -69,6 +69,12 @@
         getDate(id)
     })
 
+    $('#date').on('change', function() {
+        let id = $('#movie').val()
+        let date = $(this).val()
+        getSession(id, date)
+    })
+
     function getMovies() {
         $.get("./api/get_movies.php", function(movies) {
             $("#movie").html(movies);
@@ -84,6 +90,16 @@
             id
         }, function(dates) {
             $("#date").html(dates)
+            getSession(id, $("#date").val());
+        })
+    }
+
+    function getSession(id, date) {
+        $.get("./api/get_session.php", {
+            id,
+            date
+        }, function(session) {
+            $("#session").html(session)
         })
     }
 </script>
