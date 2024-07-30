@@ -24,7 +24,7 @@
         width: 100%;
     }
 </style>
-<h2 class="ct">線上訂票</h2>
+<h2 class="ct" style="margin:0">線上訂票</h2>
 <div id="menuBlock">
     <form action="?">
         <table id="menu">
@@ -57,7 +57,7 @@
     </form>
 </div>
 <div id="booking" style="display:none">
-    <button onclick="$('#booking,#menuBlock').toggle()">上一步</button>
+
 </div>
 
 <script>
@@ -83,7 +83,7 @@
         }
         $.get("./api/load_seats.php", info, function(seats) {
             $("#booking").html(seats);
-            $('#bookings,#menuBlock').toggle()
+            $('#booking,#menuBlock').toggle()
         })
     }
 
