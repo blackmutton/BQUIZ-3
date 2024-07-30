@@ -71,3 +71,14 @@ include "base.php";
         <button>訂購</button>
     </div>
 </div>
+<script>
+    let seats = new Array()
+    $(".chk").on("click", function() {
+        if (seats.length < 4) {
+            seats.push($(this).val())
+            $('#tickets').text(seats.length)
+        } else {
+            alert("最多只能選四個座位")
+        }
+    })
+</script>
