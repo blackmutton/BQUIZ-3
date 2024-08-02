@@ -61,6 +61,8 @@
 </div>
 
 <script>
+    let seats = new Array()
+    let info = {};
     getMovies()
     let url = new URL(window.location.href)
 
@@ -76,7 +78,7 @@
     })
 
     function loadSeats() {
-        let info = {
+        info = {
             id: $('#movie').val(),
             date: $('#date').val(),
             session: $('#session').val()
