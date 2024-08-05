@@ -1,7 +1,7 @@
 <h3 class="ct">訂單清單</h3>
 <div>
     <span>快速刪除</span>
-    <input type="radio" name="type" value="date">
+    <input type="radio" name="type" value="date" checked>
     依日期
     <input type="text" name="date" id="date">
     <input type="radio" name="type" value="movie">
@@ -83,14 +83,28 @@
     </div>
 
     <script>
-    function del(table, id) {
-        if (confirm("確定要刪除此訂單嗎?")) {
-            $.post("./api/del.php", {
-                table,
-                id
-            }, () => {
-                location.reload();
-            })
+        function del(table, id) {
+            if (confirm("確定要刪除此訂單嗎?")) {
+                $.post("./api/del.php", {
+                    table,
+                    id
+                }, () => {
+                    location.reload();
+                })
+            }
         }
-    }
-</script>
+
+        function qDel() {
+            let type = $("input[name='type']:checked").val();
+            let data = $(`#${type}`).val();
+            if (confirm(`確定要刪除所有${type}為${data}的訂單嗎`)) {
+                $.post("./api/qDel.php", {
+                    table: "order",
+                    type,
+                    data
+                }, () => {
+                    location.reload();
+                })
+            }
+        }
+    </script>
