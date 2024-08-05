@@ -89,7 +89,7 @@ include "base.php";
     })
 
     function order() {
-        info['seat'] = seats;
+        info['seats'] = seats;
         $.post("api/order.php", info, function(res) {
             $("#booking").html(res)
         })
