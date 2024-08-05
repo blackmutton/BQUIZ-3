@@ -95,7 +95,7 @@ $Order->save($_POST);
                 echo "<br>";
             }
             ?>
-            共<?= $_POST['qt'] ?>
+            共<?= $_POST['qt'] ?>張電影票
         </td>
         <!-- <td></td> -->
     </tr>
