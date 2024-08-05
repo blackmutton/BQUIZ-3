@@ -79,7 +79,7 @@ include "base.php";
     <div>您已選擇的時刻是:<?= $_GET['date'] ?> <?= $_GET['session'] ?></div>
     <div>您已經勾選<span id='tickets'>0</span>張票，最多可購買四張票</div>
     <div class="ct">
-        <button onclick="$('#booking,#menuBlock').toggle()">上一步</button>
+        <button onclick="$('#booking,#menuBlock').toggle();seats.length=0">上一步</button>
         <button onclick="order()">訂購</button>
     </div>
 </div>
